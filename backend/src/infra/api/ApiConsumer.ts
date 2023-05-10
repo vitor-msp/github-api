@@ -62,11 +62,11 @@ export class ApiConsumer implements IApiConsumer {
         per_page: perPage,
       }
     );
-    return repositories.data.map(({ id, name, url }) => {
+    return repositories.data.map(({ id, name, html_url }) => {
       return {
         id,
         name,
-        url,
+        url: html_url,
       };
     });
   }

@@ -1,5 +1,9 @@
 import { Router, Request, Response } from "express";
-import { getUserDetailsController, getUsersController } from "./factory";
+import {
+  getUserDetailsController,
+  getUserReposController,
+  getUsersController,
+} from "./factory";
 
 export const URL_GET_USERS = "/api/users";
 
@@ -15,6 +19,9 @@ export abstract class Routes {
         return getUserDetailsController.execute(req, res);
       }
     );
+    router.get("/api/users/:username/repos", (req: Request, res: Response) => {
+      return getUserReposController.execute(req, res);
+    });
     return router;
   }
 }

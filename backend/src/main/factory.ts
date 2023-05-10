@@ -5,6 +5,8 @@ import { ApiConsumerMock } from "../../test/mocks/ApiConsumerMock";
 import { ApiConsumer } from "../infra/api/ApiConsumer";
 import { GetUserDetailsController } from "../controllers/get-user-details/GetUserDetailsController";
 import { GetUserDetailsUseCase } from "../use-cases/get-user-details/GetUserDetailsUseCase";
+import { GetUserReposController } from "../controllers/get-user-repos/GetUserReposController";
+import { GetUserReposUseCase } from "../use-cases/get-user-repos/GetUserReposUseCase";
 
 dotenv.config();
 
@@ -19,4 +21,7 @@ const getUserDetailsController = new GetUserDetailsController(
   getUserDetailsUseCase
 );
 
-export { getUsersController, getUserDetailsController };
+const getUserReposUseCase = new GetUserReposUseCase(apiConsumer);
+const getUserReposController = new GetUserReposController(getUserReposUseCase);
+
+export { getUsersController, getUserDetailsController, getUserReposController };
