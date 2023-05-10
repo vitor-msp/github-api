@@ -4,10 +4,10 @@
   "description": "A web app to consume GitHub API users and repositories",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/main/server.ts",
-    "test": "jest",
+    "dev": "PRODUCTION='true' ts-node-dev --respawn --transpile-only src/main/server.ts",
+    "test": "PRODUCTION='false' jest",
     "build": "rm -rf ./dist && tsc",
-    "start": "node ./dist/src/main/server.js"
+    "start": "PRODUCTION='true' node ./dist/src/main/server.js"
   },
   "repository": {
     "type": "git",

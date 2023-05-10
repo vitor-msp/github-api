@@ -18,11 +18,10 @@ export class GetUsersController implements IGetUsersController {
     }
   }
 
-  private validateSince(req: Request): number {
-    const defaultSince = 1;
-    if (!req.query.since) return defaultSince;
+  private validateSince(req: Request): null | number {
+    if (!req.query.since) return null;
     const sinceNumber = +req.query.since;
-    if (isNaN(sinceNumber)) return defaultSince;
+    if (isNaN(sinceNumber)) return null;
     return sinceNumber;
   }
 

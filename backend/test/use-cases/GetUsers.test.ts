@@ -12,11 +12,11 @@ describe("Get Users Tests", () => {
 
   it("should receive ok with users - since is valid", async () => {
     const res: supertest.Response = await supertest(app)
-      .get(`/api/users?since=1`)
+      .get(`/api/users?since=0`)
       .send();
     expect(res.statusCode).toBe(200);
-    expect(res.body.lastPage).toBe("http://127.0.0.1:3001/api/users?since=1");
-    expect(res.body.nextPage).toBe("http://127.0.0.1:3001/api/users?since=3");
+    expect(res.body.lastPage).toBe("http://127.0.0.1:3001/api/users?since=0");
+    expect(res.body.nextPage).toBe("http://127.0.0.1:3001/api/users?since=2");
     expect(res.body.users[0].id).toBe(GET_USERS_OUTPUT_MOCK[0].id);
     expect(res.body.users[0].login).toBe(GET_USERS_OUTPUT_MOCK[0].login);
     expect(res.body.users[0].url).toBe(GET_USERS_OUTPUT_MOCK[0].url);
@@ -30,8 +30,8 @@ describe("Get Users Tests", () => {
       .get(`/api/users`)
       .send();
     expect(res.statusCode).toBe(200);
-    expect(res.body.lastPage).toBe("http://127.0.0.1:3001/api/users?since=1");
-    expect(res.body.nextPage).toBe("http://127.0.0.1:3001/api/users?since=3");
+    expect(res.body.lastPage).toBe("http://127.0.0.1:3001/api/users?since=0");
+    expect(res.body.nextPage).toBe("http://127.0.0.1:3001/api/users?since=2");
     expect(res.body.users[0].id).toBe(GET_USERS_OUTPUT_MOCK[0].id);
     expect(res.body.users[0].login).toBe(GET_USERS_OUTPUT_MOCK[0].login);
     expect(res.body.users[0].url).toBe(GET_USERS_OUTPUT_MOCK[0].url);
@@ -45,8 +45,8 @@ describe("Get Users Tests", () => {
       .get(`/api/users?since=invalid`)
       .send();
     expect(res.statusCode).toBe(200);
-    expect(res.body.lastPage).toBe("http://127.0.0.1:3001/api/users?since=1");
-    expect(res.body.nextPage).toBe("http://127.0.0.1:3001/api/users?since=3");
+    expect(res.body.lastPage).toBe("http://127.0.0.1:3001/api/users?since=0");
+    expect(res.body.nextPage).toBe("http://127.0.0.1:3001/api/users?since=2");
     expect(res.body.users[0].id).toBe(GET_USERS_OUTPUT_MOCK[0].id);
     expect(res.body.users[0].login).toBe(GET_USERS_OUTPUT_MOCK[0].login);
     expect(res.body.users[0].url).toBe(GET_USERS_OUTPUT_MOCK[0].url);

@@ -1,7 +1,7 @@
 import { IApiConsumer } from "../../infra/api/IApiConsumer";
 
 export type GetUsersInputDto = {
-  since: number;
+  since: null | number;
   url: string;
 };
 

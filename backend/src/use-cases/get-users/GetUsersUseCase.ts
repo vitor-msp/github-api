@@ -10,8 +10,10 @@ export class GetUsersUseCase implements IGetUsersUseCase {
 
   async execute(input: GetUsersInputDto): Promise<GetUsersOutputDto> {
     const usersPerPage = 30;
+    const defaultSince = 0;
+    if (!input.since) input.since = defaultSince;
     let lastPage = input.since - usersPerPage;
-    if (lastPage < 1) lastPage = 1;
+    if (lastPage < defaultSince) lastPage = defaultSince;
     const users = await this.apiConsumer.getUsers(input.since);
     const nextPage = input.since + users.length;
     return {
