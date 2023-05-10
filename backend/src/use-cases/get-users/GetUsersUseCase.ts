@@ -1,5 +1,5 @@
 import { IApiConsumer } from "../../infra/api/IApiConsumer";
-import { URL_GET_USERS } from "../../main/routes";
+import { URL_GET_USERS } from "../../main/Routes";
 import {
   GetUsersInputDto,
   GetUsersOutputDto,
