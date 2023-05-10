@@ -21,8 +21,10 @@ export class User implements IUser {
   }
 
   private validateId(userProps: UserProps): number {
-    const inputIsNotEmpty = !!userProps.id ?? false;
-    if (!inputIsNotEmpty) throw new UserError(`id is blank`);
+    const inputIsValid = userProps.id
+      ? !!userProps.id.toString().trim()
+      : false;
+    if (!inputIsValid) throw new UserError(`id is blank`);
     if (isNaN(userProps.id)) throw new UserError(`id not is a number`);
     return userProps.id;
   }

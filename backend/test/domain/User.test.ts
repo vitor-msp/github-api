@@ -18,35 +18,35 @@ describe("User Tests", () => {
     expect(user.createdAt).toBe(date);
   });
 
-  // it("should not create user without id or with invalid id", () => {
-  //   expect(() => {
-  //     //@ts-ignore
-  //     new User({
-  //       login: "login",
-  //     });
-  //   }).toThrow(UserError);
-  //   expect(() => {
-  //     new User({
-  //       //@ts-ignore
-  //       id: "",
-  //       login: "login",
-  //     });
-  //   }).toThrowError(UserError);
-  //   expect(() => {
-  //     new User({
-  //       //@ts-ignore
-  //       id: "     ",
-  //       login: "login",
-  //     });
-  //   }).toThrowError(UserError);
-  //   expect(() => {
-  //     new User({
-  //       //@ts-ignore
-  //       id: "invalid",
-  //       login: "login",
-  //     });
-  //   }).toThrowError(UserError);
-  // });
+  it("should not create user without id or with invalid id", () => {
+    expect(() => {
+      //@ts-ignore
+      new User({
+        login: "login",
+      });
+    }).toThrow(UserError);
+    expect(() => {
+      new User({
+        //@ts-ignore
+        id: "",
+        login: "login",
+      });
+    }).toThrowError(UserError);
+    expect(() => {
+      new User({
+        //@ts-ignore
+        id: "     ",
+        login: "login",
+      });
+    }).toThrowError(UserError);
+    expect(() => {
+      new User({
+        //@ts-ignore
+        id: "invalid",
+        login: "login",
+      });
+    }).toThrowError(UserError);
+  });
 
   // it("should not create user without login or with invalid login", () => {
   //   expect(() => {
