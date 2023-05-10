@@ -48,26 +48,26 @@ describe("User Tests", () => {
     }).toThrowError(UserError);
   });
 
-  // it("should not create user without login or with invalid login", () => {
-  //   expect(() => {
-  //     //@ts-ignore
-  //     new User({
-  //       id: 1,
-  //     });
-  //   }).toThrow(UserError);
-  //   expect(() => {
-  //     new User({
-  //       id: 1,
-  //       login: "",
-  //     });
-  //   }).toThrowError(UserError);
-  //   expect(() => {
-  //     new User({
-  //       id: 1,
-  //       login: "    ",
-  //     });
-  //   }).toThrowError(UserError);
-  // });
+  it("should not create user without login or with invalid login", () => {
+    expect(() => {
+      //@ts-ignore
+      new User({
+        id: 1,
+      });
+    }).toThrow(UserError);
+    expect(() => {
+      new User({
+        id: 1,
+        login: "",
+      });
+    }).toThrowError(UserError);
+    expect(() => {
+      new User({
+        id: 1,
+        login: "    ",
+      });
+    }).toThrowError(UserError);
+  });
 
   // it("should not create user without url or with invalid url", () => {
   //   expect(() => {

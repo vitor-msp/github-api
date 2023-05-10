@@ -30,8 +30,10 @@ export class User implements IUser {
   }
 
   private validateLogin(userProps: UserProps): string {
-    const inputIsNotEmpty = userProps.login ? !!userProps.login.trim() : false;
-    if (!inputIsNotEmpty) throw new UserError(`login is blank`);
+    const inputIsValid = userProps.login
+      ? !!userProps.login.toString().trim()
+      : false;
+    if (!inputIsValid) throw new UserError(`login is blank`);
     return userProps.login;
   }
 
