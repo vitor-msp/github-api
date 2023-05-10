@@ -40,10 +40,12 @@ export class User implements IUser {
   }
 
   private validateAvatarUrl(userProps: UserProps): void {
-    const inputIsNotEmpty = !!userProps.avatarUrl ?? false;
+    const inputIsNotEmpty = userProps.avatarUrl
+      ? !!userProps.avatarUrl.trim()
+      : false;
     if (!inputIsNotEmpty) throw new UserError(`avatarUrl is blank`);
     try {
-      new URL(userProps.url);
+      new URL(userProps.avatarUrl);
     } catch (error) {
       throw new UserError(`avatarUrl is not valid`);
     }
