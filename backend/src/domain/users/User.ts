@@ -13,9 +13,9 @@ export class User implements IUser {
     this.validateUrl(userProps);
     this.validateAvatarUrl(userProps);
     this.id = userProps.id;
-    this.login = userProps.login;
-    this.url = userProps.url;
-    this.avatarUrl = userProps.avatarUrl;
+    this.login = userProps.login.trim();
+    this.url = userProps.url.trim();
+    this.avatarUrl = userProps.avatarUrl.trim();
   }
 
   private validateId(userProps: UserProps): void {
@@ -25,7 +25,7 @@ export class User implements IUser {
   }
 
   private validateLogin(userProps: UserProps): void {
-    const inputIsNotEmpty = !!userProps.login ?? false;
+    const inputIsNotEmpty = userProps.login ? !!userProps.login.trim() : false;
     if (!inputIsNotEmpty) throw new UserError(`login is blank`);
   }
 
