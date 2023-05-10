@@ -30,7 +30,7 @@ export class User implements IUser {
   }
 
   private validateUrl(userProps: UserProps): void {
-    const inputIsNotEmpty = !!userProps.url ?? false;
+    const inputIsNotEmpty = userProps.url ? !!userProps.url.trim() : false;
     if (!inputIsNotEmpty) throw new UserError(`url is blank`);
     try {
       new URL(userProps.url);
