@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
 import { Octokit } from "octokit";
 import { ThinUser } from "../../use-cases/get-users/IGetUsersUseCase";
-import { IApiConsumer } from "./IApiConsumer";
+import { GetUserReposApiInput, IApiConsumer } from "./IApiConsumer";
 import { UserProps } from "../../domain/users/IUser";
+import { RepositoryProps } from "../../domain/repositories/IRepository";
 
 export class ApiConsumer implements IApiConsumer {
   private readonly octokit: Octokit;
@@ -44,5 +45,29 @@ export class ApiConsumer implements IApiConsumer {
       avatarUrl: avatar_url,
       createdAt: created_at,
     };
+  }
+
+  async getUserRepos(
+    getUserReposApiInput: GetUserReposApiInput
+  ): Promise<RepositoryProps[]> {
+    const { username, pageNumber, perPage } = getUserReposApiInput;
+    const repositories = await this.octokit.request(
+      "GET /users/{username}/repos",
+      {
+        username,
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+        page: pageNumber,
+        per_page: perPage,
+      }
+    );
+    return repositories.data.map(({ id, name, url }) => {
+      return {
+        id,
+        name,
+        url,
+      };
+    });
   }
 }
