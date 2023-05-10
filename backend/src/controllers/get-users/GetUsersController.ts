@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import { IGetUsersController } from "./IGetUsersController";
 import { IGetUsersUseCase } from "../../use-cases/get-users/IGetUsersUseCase";
-import { UserError } from "../../errors/UserError";
 
 export class GetUsersController implements IGetUsersController {
   constructor(readonly getUsersUseCase: IGetUsersUseCase) {}
