@@ -32,4 +32,18 @@ describe("Get User Details Tests", () => {
     expect(typeof user.avatarUrl).toBe("string");
     expect(typeof user.createdAt).toBe("string");
   });
+
+  it("should get user repos", async () => {
+    const username = "vitor-msp";
+    const pageNumber = 0;
+    const perPage = 100;
+    const repos = await api.getUserRepos({ username, pageNumber, perPage });
+    expect(repos.length > 0).toBeTruthy();
+    expect(!!repos[0].id).toBeTruthy();
+    expect(!!repos[0].name).toBeTruthy();
+    expect(!!repos[0].url).toBeTruthy();
+    expect(typeof repos[0].id).toBe("number");
+    expect(typeof repos[0].name).toBe("string");
+    expect(typeof repos[0].url).toBe("string");
+  });
 });

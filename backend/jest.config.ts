@@ -13,5 +13,5 @@ export default {
   coverageDirectory: "test/coverage",
   coverageProvider: "v8",
   preset: "ts-jest",
-  testMatch: ["**/ApiConsumer.test.ts?(x)"],
+  testMatch: ["**/*.test.ts?(x)"],
 };
