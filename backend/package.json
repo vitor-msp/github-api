@@ -4,7 +4,8 @@
   "description": "A web app to consume GitHub API users and repositories",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "test": "jest"
   },
   "repository": {
     "type": "git",

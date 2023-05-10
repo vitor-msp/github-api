@@ -6,8 +6,6 @@ export class User implements IUser {
   readonly login: string;
   readonly url: string;
   readonly avatarUrl: string;
-  private readonly urlRegexPattern =
-    "/^https?://(?:www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/";
 
   constructor(userProps: UserProps) {
     this.validateId(userProps);
@@ -34,16 +32,20 @@ export class User implements IUser {
   private validateUrl(userProps: UserProps): void {
     const inputIsNotEmpty = !!userProps.url ?? false;
     if (!inputIsNotEmpty) throw new UserError(`url is blank`);
-    const urlIsValid = new RegExp(this.urlRegexPattern).test(userProps.url);
-    if (!urlIsValid) throw new UserError(`url is not valid`);
+    try {
+      new URL(userProps.url);
+    } catch (error) {
+      throw new UserError(`url is not valid`);
+    }
   }
 
   private validateAvatarUrl(userProps: UserProps): void {
     const inputIsNotEmpty = !!userProps.avatarUrl ?? false;
     if (!inputIsNotEmpty) throw new UserError(`avatarUrl is blank`);
-    const urlIsValid = new RegExp(this.urlRegexPattern).test(
-      userProps.avatarUrl
-    );
-    if (!urlIsValid) throw new UserError(`avatarUrl is not valid`);
+    try {
+      new URL(userProps.url);
+    } catch (error) {
+      throw new UserError(`avatarUrl is not valid`);
+    }
   }
 }
