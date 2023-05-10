@@ -3,16 +3,19 @@ import { UserError } from "../../src/errors/UserError";
 
 describe("User Tests", () => {
   it("should create user", () => {
+    const date = new Date().toISOString();
     const user = new User({
       id: 1,
       login: "login",
       url: "https://www.github.com",
       avatarUrl: "https://www.github.com",
+      createdAt: date,
     });
     expect(user.id).toBe(1);
     expect(user.login).toBe("login");
     expect(user.url).toBe("https://www.github.com");
     expect(user.avatarUrl).toBe("https://www.github.com");
+    expect(user.createdAt).toBe(date);
   });
 
   it("should not create user without id or with invalid id", () => {
