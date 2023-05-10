@@ -69,59 +69,57 @@ describe("User Tests", () => {
     }).toThrowError(UserError);
   });
 
-  // it("should not create user without url or with invalid url", () => {
-  //   expect(() => {
-  //     //@ts-ignore
-  //     new User({
-  //       id: 1,
-  //       login: "login",
-  //       avatarUrl: "https://www.github.com",
-  //     });
-  //   }).toThrow(UserError);
-  //   expect(() => {
-  //     new User({
-  //       id: 1,
-  //       login: "login",
-  //       url: " ",
-  //       avatarUrl: "https://www.github.com",
-  //     });
-  //   }).toThrowError(UserError);
-  //   expect(() => {
-  //     new User({
-  //       id: 1,
-  //       login: "login",
-  //       url: "www.github.com",
-  //       avatarUrl: "https://www.github.com",
-  //     });
-  //   }).toThrowError(UserError);
-  // });
+  it("should not create user with invalid url", () => {
+    let user = new User({
+      id: 1,
+      login: "login",
+      url: "",
+    });
+    expect(user.id).toBe(1);
+    expect(user.login).toBe("login");
+    expect(user.url).toBe(undefined);
+    user = new User({
+      id: 1,
+      login: "login",
+      url: "      ",
+    });
+    expect(user.id).toBe(1);
+    expect(user.login).toBe("login");
+    expect(user.url).toBe(undefined);
+    expect(() => {
+      new User({
+        id: 1,
+        login: "login",
+        url: "www.github.com",
+      });
+    }).toThrowError(UserError);
+  });
 
-  // it("should not create user without avatarUrl or with invalid avatarUrl", () => {
-  //   expect(() => {
-  //     //@ts-ignore
-  //     new User({
-  //       id: 1,
-  //       login: "login",
-  //       url: "https://www.github.com",
-  //     });
-  //   }).toThrow(UserError);
-  //   expect(() => {
-  //     new User({
-  //       id: 1,
-  //       login: "login",
-  //       url: "https://www.github.com",
-  //       avatarUrl: "",
-  //     });
-  //   }).toThrowError(UserError);
-  //   expect(() => {
-  //     new User({
-  //       id: 1,
-  //       login: "login",
-  //       url: "https://www.github.com",
-  //       avatarUrl: "www.github.com",
-  //     });
-  //   }).toThrowError(UserError);
-  // });
+  it("should not create user with invalid avatarUrl", () => {
+    let user = new User({
+      id: 1,
+      login: "login",
+      avatarUrl: "",
+    });
+    expect(user.id).toBe(1);
+    expect(user.login).toBe("login");
+    expect(user.avatarUrl).toBe(undefined);
+    user = new User({
+      id: 1,
+      login: "login",
+      avatarUrl: "      ",
+    });
+    expect(user.id).toBe(1);
+    expect(user.login).toBe("login");
+    expect(user.avatarUrl).toBe(undefined);
+    expect(() => {
+      new User({
+        id: 1,
+        login: "login",
+        avatarUrl: "www.github.com",
+      });
+    }).toThrowError(UserError);
+  });
 
   it("should not create user with invalid createdAt", () => {
     let user = new User({

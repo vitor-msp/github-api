@@ -11,7 +11,6 @@ export class User implements IUser {
   constructor(userProps: UserProps) {
     this.id = this.validateId(userProps);
     this.login = this.validateLogin(userProps);
-    this.login = userProps.login.trim();
     const url = this.validateUrl(userProps);
     if (url != null) this.url = url;
     const avatarUrl = this.validateAvatarUrl(userProps);
