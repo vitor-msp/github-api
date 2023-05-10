@@ -20,8 +20,9 @@ export class GetUserReposController implements IGetUserReposController {
   }
 
   private validatePageNumber(req: Request): undefined | number {
-    if (!req.query.pageNumber) return undefined;
-    const pageNumber = +req.query.pageNumber;
+    console.log(req.query.pagenumber);
+    if (!req.query.pagenumber) return undefined;
+    const pageNumber = +req.query.pagenumber;
     if (isNaN(pageNumber)) return undefined;
     return pageNumber;
   }
