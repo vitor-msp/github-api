@@ -15,34 +15,34 @@ describe("User Tests", () => {
     expect(user.avatarUrl).toBe("https://www.github.com");
   });
 
-  //   it("should not create user without id or with invalid id", () => {
-  //     expect(() => {
-  //       //@ts-ignore
-  //       new User({
-  //         login: "login",
-  //         url: "https://www.github.com",
-  //         avatarUrl: "https://www.github.com",
-  //       });
-  //     }).toThrow(UserError);
-  //     expect(() => {
-  //       new User({
-  //         //@ts-ignore
-  //         id: "",
-  //         login: "login",
-  //         url: "https://www.github.com",
-  //         avatarUrl: "https://www.github.com",
-  //       });
-  //     }).toThrowError(UserError);
-  //     expect(() => {
-  //       new User({
-  //         //@ts-ignore
-  //         id: "invalid",
-  //         login: "login",
-  //         url: "https://www.github.com",
-  //         avatarUrl: "https://www.github.com",
-  //       });
-  //     }).toThrowError(UserError);
-  //   });
+  it("should not create user without id or with invalid id", () => {
+    expect(() => {
+      //@ts-ignore
+      new User({
+        login: "login",
+        url: "https://www.github.com",
+        avatarUrl: "https://www.github.com",
+      });
+    }).toThrow(UserError);
+    expect(() => {
+      new User({
+        //@ts-ignore
+        id: "",
+        login: "login",
+        url: "https://www.github.com",
+        avatarUrl: "https://www.github.com",
+      });
+    }).toThrowError(UserError);
+    expect(() => {
+      new User({
+        //@ts-ignore
+        id: "invalid",
+        login: "login",
+        url: "https://www.github.com",
+        avatarUrl: "https://www.github.com",
+      });
+    }).toThrowError(UserError);
+  });
 
   //   it("should not create user without login or with invalid login", () => {
   //     expect(() => {
