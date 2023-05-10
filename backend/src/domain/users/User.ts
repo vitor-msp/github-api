@@ -9,55 +9,60 @@ export class User implements IUser {
   readonly createdAt?: string;
 
   constructor(userProps: UserProps) {
-    this.validateId(userProps);
-    this.validateLogin(userProps);
-    this.validateUrl(userProps);
-    this.validateAvatarUrl(userProps);
-    this.validateCreatedAt(userProps);
-    this.id = userProps.id;
+    this.id = this.validateId(userProps);
+    this.login = this.validateLogin(userProps);
     this.login = userProps.login.trim();
-    this.url = userProps.url!.trim();
-    this.avatarUrl = userProps.avatarUrl!.trim();
-    this.createdAt = userProps.createdAt;
+    const url = this.validateUrl(userProps);
+    if (url != null) this.url = url;
+    const avatarUrl = this.validateAvatarUrl(userProps);
+    if (avatarUrl != null) this.avatarUrl = avatarUrl;
+    const createdAt = this.validateCreatedAt(userProps);
+    if (createdAt != null) this.createdAt = createdAt;
   }
 
-  private validateId(userProps: UserProps): void {
+  private validateId(userProps: UserProps): number {
     const inputIsNotEmpty = !!userProps.id ?? false;
     if (!inputIsNotEmpty) throw new UserError(`id is blank`);
     if (isNaN(userProps.id)) throw new UserError(`id not is a number`);
+    return userProps.id;
   }
 
-  private validateLogin(userProps: UserProps): void {
+  private validateLogin(userProps: UserProps): string {
     const inputIsNotEmpty = userProps.login ? !!userProps.login.trim() : false;
     if (!inputIsNotEmpty) throw new UserError(`login is blank`);
+    return userProps.login;
   }
 
-  private validateUrl(userProps: UserProps): void {
-    const inputIsNotEmpty = userProps.url ? !!userProps.url.trim() : false;
-    if (!inputIsNotEmpty) throw new UserError(`url is blank`);
+  private validateUrl(userProps: UserProps): null | string {
+    if (!userProps.url) return null;
+    const url = userProps.url.toString().trim();
+    if (!url) return null;
     try {
-      new URL(userProps.url!);
+      new URL(userProps.url);
+      return url;
     } catch (error) {
       throw new UserError(`url is not valid`);
     }
   }
 
-  private validateAvatarUrl(userProps: UserProps): void {
-    const inputIsNotEmpty = userProps.avatarUrl
-      ? !!userProps.avatarUrl.trim()
-      : false;
-    if (!inputIsNotEmpty) throw new UserError(`avatarUrl is blank`);
+  private validateAvatarUrl(userProps: UserProps): null | string {
+    if (!userProps.avatarUrl) return null;
+    const url = userProps.avatarUrl.toString().trim();
+    if (!url) return null;
     try {
-      new URL(userProps.avatarUrl!);
+      new URL(userProps.avatarUrl);
+      return url;
     } catch (error) {
       throw new UserError(`avatarUrl is not valid`);
     }
   }
 
-  private validateCreatedAt(userProps: UserProps): void {
-    const inputIsNotEmpty = !!userProps.createdAt ?? false;
-    if (!inputIsNotEmpty) throw new UserError(`createdAt is blank`);
-    const timeInMiliSeconds = new Date(userProps.createdAt!).getTime();
+  private validateCreatedAt(userProps: UserProps): null | string {
+    if (!userProps.createdAt) return null;
+    const createdAt = userProps.createdAt.toString().trim();
+    if (!createdAt) return null;
+    const timeInMiliSeconds = new Date(createdAt).getTime();
     if (isNaN(timeInMiliSeconds)) throw new UserError(`createdAt is not valid`);
+    return createdAt;
   }
 }
