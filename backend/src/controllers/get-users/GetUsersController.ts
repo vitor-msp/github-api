@@ -1,28 +1,38 @@
 import { Request, Response } from "express";
+import dotenv from "dotenv";
 import { IGetUsersController } from "./IGetUsersController";
 import { IGetUsersUseCase } from "../../use-cases/get-users/IGetUsersUseCase";
 import { UserError } from "../../errors/UserError";
-import { GetUsersError } from "../../errors/GetUsersError";
 
 export class GetUsersController implements IGetUsersController {
   constructor(readonly getUsersUseCase: IGetUsersUseCase) {}
 
   async execute(req: Request, res: Response): Promise<Response> {
     try {
-      const input = this.validateSince(req);
-      const output = await this.getUsersUseCase.execute({ since: input });
+      const since = this.validateSince(req);
+      const url = this.getLocalUrl(req);
+      const output = await this.getUsersUseCase.execute({ since, url });
       return res.status(200).json(output);
     } catch (error: any) {
-      if (error instanceof UserError || error instanceof GetUsersError)
-        return res.status(400).json({ errorMessage: error.message });
       return res.status(500).json({ errorMessage: "internal error" });
     }
   }
 
   private validateSince(req: Request): number {
-    const inputIsValid = req.body.id ? !!req.body.id.toString().trim() : false;
-    if (!inputIsValid) throw new GetUsersError(`id is blank`);
-    if (isNaN(req.body.id)) throw new GetUsersError(`id not is a number`);
-    return req.body.id;
+    const defaultSince = 1;
+    if (!req.query.since) return defaultSince;
+    const sinceNumber = +req.query.since;
+    if (isNaN(sinceNumber)) return defaultSince;
+    return sinceNumber;
+  }
+
+  private getLocalUrl(req: Request): string {
+    dotenv.config();
+    const protocol = req.protocol;
+    const host = req.hostname;
+    const path = req.path;
+    const port = process.env.SERVER_PORT;
+    const fullUrl = `${protocol}://${host}:${port}${path}`;
+    return fullUrl;
   }
 }

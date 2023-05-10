@@ -1,5 +1,4 @@
 import { IApiConsumer } from "../../infra/api/IApiConsumer";
-import { URL_GET_USERS } from "../../main/Routes";
 import {
   GetUsersInputDto,
   GetUsersOutputDto,
@@ -11,12 +10,13 @@ export class GetUsersUseCase implements IGetUsersUseCase {
 
   async execute(input: GetUsersInputDto): Promise<GetUsersOutputDto> {
     const usersPerPage = 30;
-    const lastPage = input.since - usersPerPage;
-    const nextPage = input.since + usersPerPage;
+    let lastPage = input.since - usersPerPage;
+    if (lastPage < 1) lastPage = 1;
     const users = await this.apiConsumer.getUsers(input.since);
+    const nextPage = input.since + users.length;
     return {
-      lastPage: `${URL_GET_USERS}?since=${lastPage}`,
-      nextPage: `${URL_GET_USERS}?since=${nextPage}`,
+      lastPage: `${input.url}?since=${lastPage}`,
+      nextPage: `${input.url}?since=${nextPage}`,
       users,
     };
   }
