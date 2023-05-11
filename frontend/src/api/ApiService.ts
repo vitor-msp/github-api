@@ -1,10 +1,12 @@
 import axios, { AxiosInstance } from "axios";
 import {
   GetUserDetailsResponse,
+  GetUserResposResponse,
   GetUsersResponse,
   IApiService,
 } from "./IApiService";
 import { UserDetails } from "../entities/UserDetails";
+import { Repository } from "../entities/Repository";
 
 class ApiService implements IApiService {
   private readonly api: AxiosInstance;
@@ -32,9 +34,7 @@ class ApiService implements IApiService {
     return res;
   }
 
-  async getUserDetails(
-    username: string
-  ): Promise<UserDetails | null> {
+  async getUserDetails(username: string): Promise<UserDetails | null> {
     let error = true;
     const res: GetUserDetailsResponse = await this.api
       .get(`/users/${username}/details`)
@@ -45,6 +45,19 @@ class ApiService implements IApiService {
       .catch((error) => error.response?.data ?? error.message);
     if (error) return null;
     return res.user;
+  }
+
+  async getUserRepos(username: string): Promise<Repository[] | null> {
+    let error = true;
+    const res: GetUserResposResponse = await this.api
+      .get(`/users/${username}/repos`)
+      .then((res) => {
+        error = false;
+        return res.data;
+      })
+      .catch((error) => error.response?.data ?? error.message);
+    if (error) return null;
+    return res.repos;
   }
 }
 

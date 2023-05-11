@@ -1,4 +1,5 @@
 import { Details } from "./Details";
+import { Repos } from "./Repos";
 
 type UserDetailsPageProps = {
   username: string;
@@ -17,6 +18,7 @@ export const UserDetailsPage = ({
         </button>
       </div>
       <Details username={username} />
+      <Repos username={username} />
     </>
   );
 };
