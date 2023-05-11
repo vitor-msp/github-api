@@ -8,7 +8,7 @@ type UsersListProps = {
 
 export const UsersList = ({ users, selectUser }: UsersListProps) => {
   return (
-    <ul>
+    <ul className="list-group">
       {users.map((user) => {
         return <UserItem key={user.id} user={user} selectUser={selectUser} />;
       })}

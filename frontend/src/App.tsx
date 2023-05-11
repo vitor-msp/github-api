@@ -20,7 +20,8 @@ export const App = () => {
   };
 
   return (
-    <div>
+    <div className="container-fluid p-3">
+      <h4>GitHub API Consumer</h4>
       {(currentPage === USER_DETAILS_PAGE && (
         <UserDetailsPage
           username={currentUsername}

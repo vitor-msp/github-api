@@ -13,9 +13,26 @@ export const UserItem = ({ user, selectUser }: UserItemProps) => {
   };
 
   return (
-    <li onClick={selectThisUser}>
-      <span>id: {id}</span>
-      <span>login: {login}</span>
+    <li className="list-group-item d-flex flex-row clickable">
+      <div>
+        <button
+          type="button"
+          onClick={selectThisUser}
+          className="btn btn-outline-primary"
+        >
+          view details
+        </button>
+      </div>
+      <div className="mx-5">
+        <span>
+          id: <strong>{id}</strong>
+        </span>
+      </div>
+      <div className="mx-5">
+        <span className="my-3">
+          login: <strong>{login}</strong>
+        </span>
+      </div>
     </li>
   );
 };

@@ -44,9 +44,17 @@ export const UsersPage = ({ selectUser }: UsersPageProps) => {
   return (
     <>
       <UsersList users={users} selectUser={selectUser} />
-      <div>
-        <button type="button" onClick={getLastPage}>{`<<`}</button>
-        <button type="button" onClick={getNextPage}>{`>>`}</button>
+      <div className="d-flex flex-row justify-content-center my-2">
+        <button
+          type="button"
+          onClick={getLastPage}
+          className="btn btn-primary mx-2"
+        >{`<<`}</button>
+        <button
+          type="button"
+          onClick={getNextPage}
+          className="btn btn-primary mx-2"
+        >{`>>`}</button>
       </div>
     </>
   );
