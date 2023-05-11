@@ -8,7 +8,6 @@ export default {
     "!**/*.test.ts",
     "!**/jest.config.ts",
     "!**/server.ts",
-    "!**/others/**",
   ],
   coverageDirectory: "test/coverage",
   coverageProvider: "v8",

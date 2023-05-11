@@ -1,0 +1,9 @@
+dist
+node_modules
+test
+!test/mocks
+.dockerignore
+.env.sample
+.gitignore
+Dockerfile
+jest.config.ts
