@@ -10,7 +10,12 @@ export const UsersPage = () => {
     (async () => {
       if (users.length > 0) return;
       const newUsers = await apiService.getUsers();
-      setUsers(newUsers);
+      console.log(newUsers);
+      if (!newUsers) {
+        alert("Error to get users.");
+        return;
+      }
+      setUsers(newUsers.users);
     })();
   }, [users.length]);
 
