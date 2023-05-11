@@ -7,13 +7,13 @@ import {
 } from "./IApiService";
 import { UserDetails } from "../entities/UserDetails";
 import { Repository } from "../entities/Repository";
+import { SinceFromUrl } from "../utils/SinceFromUrl";
 
 class ApiService implements IApiService {
   private readonly api: AxiosInstance;
 
   constructor() {
     const baseURL = process.env.REACT_APP_BACKEND_URL;
-    console.log(baseURL);
     if (!baseURL) throw new Error(`missing backend url`);
     this.api = axios.create({
       baseURL,
@@ -21,10 +21,10 @@ class ApiService implements IApiService {
   }
 
   async getUsers(url?: string): Promise<GetUsersResponse | null> {
-    if (!url) url = "/users";
+    const since = SinceFromUrl.extract(url);
     let error = true;
     const res: GetUsersResponse = await this.api
-      .get(url)
+      .get(`/users?since=${since}`)
       .then((res) => {
         error = false;
         return res.data;
