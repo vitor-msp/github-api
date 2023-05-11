@@ -13,8 +13,12 @@ export const UserDetailsPage = ({
   return (
     <>
       <div>
-        <button type="button" onClick={backToUsersPage}>
-          back
+        <button
+          type="button"
+          onClick={backToUsersPage}
+          className="btn btn-outline-primary my-3"
+        >
+          {"<< back"}
         </button>
       </div>
       <Details username={username} />

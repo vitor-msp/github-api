@@ -19,17 +19,34 @@ export const Details = ({ username }: DetailsProps) => {
 
   return (
     <>
-      <div>
-        {user?.avatarUrl && <img src={user.avatarUrl} alt={user.login} />}
-      </div>
-      <div>
-        <span>id: {user?.id}</span>
-        <span>login: {user?.login}</span>
-        <span>createdAt: {user?.createdAt}</span>
+      <div className="d-flex flex-column">
+        <span>
+          id: <strong>{user?.id}</strong>
+        </span>
+        <span>
+          login: <strong>{user?.login}</strong>
+        </span>
+        {user?.createdAt && (
+          <span>
+            created at:{" "}
+            <strong>{new Date(user.createdAt).toUTCString()}</strong>
+          </span>
+        )}
         {user?.url && (
           <a href={user.url} target="_blank" rel="noreferrer">
             view profile
           </a>
+        )}
+      </div>
+      <div>
+        {user?.avatarUrl && (
+          <img
+            src={user.avatarUrl}
+            alt={user.login}
+            width={300}
+            height={"auto"}
+            className="rounded"
+          />
         )}
       </div>
     </>

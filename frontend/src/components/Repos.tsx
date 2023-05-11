@@ -18,27 +18,32 @@ export const Repos = ({ username }: ReposProps) => {
   }, [repositories, username]);
 
   return (
-    <>
-      <table>
-        <tr>
-          <th>id</th>
-          <th>name</th>
-          <th>url</th>
-        </tr>
-        {repositories?.map(({ id, name, url }) => {
-          return (
-            <tr>
-              <td>{id}</td>
-              <td>{name}</td>
-              <td>
-                <a href={url} target="_blank" rel="noreferrer">
-                  view repo
-                </a>
-              </td>
-            </tr>
-          );
-        })}
+    <div className="my-3">
+      <h5>Public Repositories</h5>
+      <table className="table table-hover">
+        <thead className="table-primary">
+          <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>url</th>
+          </tr>
+        </thead>
+        <tbody>
+          {repositories?.map(({ id, name, url }) => {
+            return (
+              <tr>
+                <td>{id}</td>
+                <td>{name}</td>
+                <td>
+                  <a href={url} target="_blank" rel="noreferrer">
+                    view repo
+                  </a>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
-    </>
+    </div>
   );
 };
