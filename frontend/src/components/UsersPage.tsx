@@ -4,7 +4,11 @@ import { User } from "../entities/User";
 import { apiService } from "../api/ApiService";
 import { GetUsersResponse } from "../api/IApiService";
 
-export const UsersPage = () => {
+export type UsersPageProps = {
+  selectUser: (username: string) => void;
+};
+
+export const UsersPage = ({ selectUser }: UsersPageProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [lastPage, setLastPage] = useState<string>("");
   const [nextPage, setNextPage] = useState<string>("");
@@ -39,7 +43,7 @@ export const UsersPage = () => {
 
   return (
     <>
-      <UsersList users={users} />
+      <UsersList users={users} selectUser={selectUser} />
       <div>
         <button type="button" onClick={getLastPage}>{`<<`}</button>
         <button type="button" onClick={getNextPage}>{`>>`}</button>
