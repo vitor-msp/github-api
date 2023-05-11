@@ -1,7 +1,7 @@
 import { User } from "../entities/User";
 import { UserItem } from "./UserItem";
 
-export type UsersListProps = {
+type UsersListProps = {
   users: User[];
   selectUser: (username: string) => void;
 };

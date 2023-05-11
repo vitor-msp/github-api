@@ -4,7 +4,7 @@ import { User } from "../entities/User";
 import { apiService } from "../api/ApiService";
 import { GetUsersResponse } from "../api/IApiService";
 
-export type UsersPageProps = {
+type UsersPageProps = {
   selectUser: (username: string) => void;
 };
 

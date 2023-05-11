@@ -1,4 +1,6 @@
-export type UserDetailsProps = {
+import { Details } from "./Details";
+
+type UserDetailsPageProps = {
   username: string;
   backToUsersPage: () => void;
 };
@@ -6,13 +8,15 @@ export type UserDetailsProps = {
 export const UserDetailsPage = ({
   username,
   backToUsersPage,
-}: UserDetailsProps) => {
+}: UserDetailsPageProps) => {
   return (
     <>
-      <button type="button" onClick={backToUsersPage}>
-        back
-      </button>
-      <span>{username}</span>
+      <div>
+        <button type="button" onClick={backToUsersPage}>
+          back
+        </button>
+      </div>
+      <Details username={username} />
     </>
   );
 };

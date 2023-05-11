@@ -1,5 +1,10 @@
 import axios, { AxiosInstance } from "axios";
-import { GetUsersResponse, IApiService } from "./IApiService";
+import {
+  GetUserDetailsResponse,
+  GetUsersResponse,
+  IApiService,
+} from "./IApiService";
+import { UserDetails } from "../entities/UserDetails";
 
 class ApiService implements IApiService {
   private readonly api: AxiosInstance;
@@ -25,6 +30,21 @@ class ApiService implements IApiService {
       .catch((error) => error.response?.data ?? error.message);
     if (error) return null;
     return res;
+  }
+
+  async getUserDetails(
+    username: string
+  ): Promise<UserDetails | null> {
+    let error = true;
+    const res: GetUserDetailsResponse = await this.api
+      .get(`/users/${username}/details`)
+      .then((res) => {
+        error = false;
+        return res.data;
+      })
+      .catch((error) => error.response?.data ?? error.message);
+    if (error) return null;
+    return res.user;
   }
 }
 
