@@ -7,5 +7,5 @@ export type GetUsersResponse = {
 };
 
 export interface IApiService {
-  getUsers(): Promise<GetUsersResponse | null>;
+  getUsers(url?: string): Promise<GetUsersResponse | null>;
 }

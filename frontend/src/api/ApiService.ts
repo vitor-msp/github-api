@@ -13,10 +13,11 @@ class ApiService implements IApiService {
     });
   }
 
-  async getUsers(): Promise<GetUsersResponse | null> {
+  async getUsers(url?: string): Promise<GetUsersResponse | null> {
+    if (!url) url = "/users";
     let error = true;
     const res: GetUsersResponse = await this.api
-      .get("/users")
+      .get(url)
       .then((res) => {
         error = false;
         return res.data;
